@@ -618,6 +618,18 @@ Place the script in the rc.local file ONLY in the controller node.
 NOTE: The names of the VMs must be obtained from "nova list" command.
 
 
+
+### DVR
+
+The installer supports enabling "Distributed Routers". The option is "no" (off) by default. If you want to enable it set in the main-config:
+
+```bash
+dvr_enable="no"
+```
+
+NOTE: If you are not using floating IP's or any kind of virtual routers, or if you are installing an all-in-one server, let this variable to "no".
+
+
 ### DNSMASQ
 
 Neutron dhcp-agent uses **DNSMASQ** for IP assignation to the VM's (instances). We include a customized dnsmasq-control file with some samples that you can use to fine-tune your dhcp-agent:

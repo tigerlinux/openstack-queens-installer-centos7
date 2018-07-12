@@ -1,0 +1,10 @@
+0.1.0.b.el7 - July 11, 2018
+
+- First beta for Centos 7!
+- All modules adapted for OpenStack release 17 "Queens"
+- Removed uuid and pki as token options for Keystone.
+  Only "fernet" is used now.
+- Added selectable FWaaS installable version for v1 and v2
+  (controlled on main config).
+- DVR is now optional (controlled on main config).
+- General updates on notes and documentation.

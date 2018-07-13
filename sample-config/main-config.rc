@@ -5,8 +5,8 @@
 # E-Mail: TigerLinux@Gmail.com
 #
 # Main Configuration
-# Version: 0.1.2.b.el7 "Panthera tigris"
-# July 12, 2018
+# Version: 1.0.0.el7 "Panthera tigris"
+# July 13, 2018
 #
 
 #
@@ -940,13 +940,9 @@ extramanilahosts=""
 
 
 #
-# OPENSTACK DESIGNATE - EXPERIMENTAL
+# OPENSTACK DESIGNATE
 #
-# We are including EXPERIMENTAL support for Designate. Please, read all the documentation
-# about OpenStack Designate in order to fully understand the way DNSaaS is implemented with
-# designate.
-# As with the other modules (trove, manila, etc.) our default is "no". Change it to "yes" in
-# order to install designate:
+# Set the following variable to "yes" if you want to install designate
 designateinstall="no"
 designatehost="192.168.56.60"
 # Again, change the password and e-mail

@@ -1,3 +1,9 @@
+1.0.0.el7 - July 13, 2018
+
+- Production ready release for Centos 7.
+- Some minor fixes on Designate install
+  module.
+
 0.1.2.b.el7 - July 12, 2018
 
 - Fixed pools file for Designate.

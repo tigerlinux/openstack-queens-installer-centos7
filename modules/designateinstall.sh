@@ -88,10 +88,12 @@ echo "Installing Designate Packages"
 yum -y install openstack-designate\*
 yum -y install python-designateclient
 
-rndc-confgen -a -k designate -c /etc/designate/rndc.key -r /dev/urandom
+# rndc-confgen -a -k designate -c /etc/designate/rndc.key -r /dev/urandom
 
 cat ./libs/designate/named.conf > /etc/named.conf
 chown named.named /var/named
+# chown named.named /etc/designate/rndc.key
+# chmod ug+r /etc/designate/rndc.key
 
 sync
 systemctl restart named

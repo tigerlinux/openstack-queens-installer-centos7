@@ -5,8 +5,8 @@
 # E-Mail: TigerLinux@Gmail.com
 #
 # Main Installer Script
-# Version: 0.1.0.b.el7 "Panthera tigris"
-# July 11, 2018
+# Version: 0.1.2.b.el7 "Panthera tigris"
+# July 12, 2018
 #
 
 PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
@@ -75,7 +75,7 @@ case $1 in
 	echo "Flavor: OpenStack QUEENS for Centos 7"
 	echo "Made by: Reynaldo R. Martinez P."
 	echo "E-Mail: TigerLinux@Gmail.com"
-	echo "Version 0.1.0.b.el7 \"Panthera tigris\" - July 11, 2018"
+	echo "Version 0.1.2.b.el7 \"Panthera tigris\" - July 12, 2018"
 	echo ""
 	echo "I'll verify all requiremens"
 	echo "If any requirement is not met, I'll stop and inform what's missing"

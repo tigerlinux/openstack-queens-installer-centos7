@@ -145,14 +145,14 @@ crudini --set /etc/designate/designate.conf "service:api" enabled_extensions_v2 
 #
 
 crudini --set /etc/designate/designate.conf keystone_authtoken auth_host $keystonehost
-crudini --set /etc/designate/designate.conf keystone_authtoken auth_port 35357
+crudini --set /etc/designate/designate.conf keystone_authtoken auth_port 5000
 crudini --set /etc/designate/designate.conf keystone_authtoken auth_protocol http
 crudini --set /etc/designate/designate.conf keystone_authtoken admin_tenant_name $keystoneservicestenant
 crudini --set /etc/designate/designate.conf keystone_authtoken admin_user $designateuser
 crudini --set /etc/designate/designate.conf keystone_authtoken admin_password $designatepass
 crudini --set /etc/designate/designate.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/designate/designate.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/designate/designate.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/designate/designate.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/designate/designate.conf keystone_authtoken auth_type password
 crudini --set /etc/designate/designate.conf keystone_authtoken memcached_servers $keystonehost:11211
 crudini --set /etc/designate/designate.conf keystone_authtoken project_domain_name $keystonedomain
@@ -365,7 +365,7 @@ then
 	crudini --set /etc/designate/designate.conf "network_api:neutron" admin_username $designateuser
 	crudini --set /etc/designate/designate.conf "network_api:neutron" admin_password $designatepass
 	crudini --set /etc/designate/designate.conf "network_api:neutron" admin_tenant_name $keystoneservicestenant
-	crudini --set /etc/designate/designate.conf "network_api:neutron" auth_url "http://$keystonehost:35357"
+	crudini --set /etc/designate/designate.conf "network_api:neutron" auth_url "http://$keystonehost:5000"
 	crudini --set /etc/designate/designate.conf "network_api:neutron" auth_strategy keystone
 	crudini --set /etc/designate/designate.conf "handler:nova_fixed" domain_id \"$myzoneid\"
 	crudini --set /etc/designate/designate.conf "handler:nova_fixed" zone_id \"$myzoneid\"

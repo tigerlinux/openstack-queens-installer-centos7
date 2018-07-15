@@ -110,7 +110,7 @@ case $dbflavor in
 esac
 
 crudini --set /etc/magnum/magnum.conf database retry_interval 10
-crudini --set /etc/magnum/magnum.conf database idle_timeout 3600
+crudini --set /etc/magnum/magnum.conf database connection_recycle_time 3600
 crudini --set /etc/magnum/magnum.conf database min_pool_size 1
 crudini --set /etc/magnum/magnum.conf database max_pool_size 10
 crudini --set /etc/magnum/magnum.conf database max_retries 100
@@ -135,7 +135,7 @@ domaindefaultid=`openstack domain show default -f value -c id`
 crudini --set /etc/magnum/magnum.conf keystone_authtoken project_name $keystoneservicestenant
 crudini --set /etc/magnum/magnum.conf keystone_authtoken username $magnumuser
 crudini --set /etc/magnum/magnum.conf keystone_authtoken password $magnumpass
-crudini --set /etc/magnum/magnum.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/magnum/magnum.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/magnum/magnum.conf keystone_authtoken project_domain_name $keystonedomain
 crudini --set /etc/magnum/magnum.conf keystone_authtoken project_domain_id $domaindefaultid
 crudini --set /etc/magnum/magnum.conf keystone_authtoken user_domain_name $keystonedomain
@@ -148,7 +148,7 @@ crudini --set /etc/magnum/magnum.conf keystone_authtoken www_authenticate_uri ht
 crudini --set /etc/magnum/magnum.conf keystone_authtoken memcached_servers $keystonehost:11211
 # Due the following bug, admin_user, admin_tenant_name and admin_password are still needed:
 # https://bugs.launchpad.net/magnum/+bug/1594888
-crudini --set /etc/magnum/magnum.conf keystone_authtoken identity_uri http://$keystonehost:35357
+crudini --set /etc/magnum/magnum.conf keystone_authtoken identity_uri http://$keystonehost:5000
 crudini --set /etc/magnum/magnum.conf keystone_authtoken admin_user $magnumuser
 crudini --set /etc/magnum/magnum.conf keystone_authtoken admin_tenant_name $keystoneservicestenant
 crudini --set /etc/magnum/magnum.conf keystone_authtoken admin_password $magnumpass

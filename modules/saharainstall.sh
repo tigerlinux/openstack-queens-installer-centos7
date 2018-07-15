@@ -128,7 +128,7 @@ crudini --set /etc/sahara/sahara.conf DEFAULT control_exchange openstack
 crudini --set /etc/sahara/sahara.conf keystone_authtoken signing_dir /tmp/keystone-signing-sahara
 crudini --set /etc/sahara/sahara.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/sahara/sahara.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/sahara/sahara.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/sahara/sahara.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/sahara/sahara.conf keystone_authtoken auth_type password
 crudini --set /etc/sahara/sahara.conf keystone_authtoken project_domain_name $keystonedomain
 crudini --set /etc/sahara/sahara.conf keystone_authtoken user_domain_name $keystonedomain

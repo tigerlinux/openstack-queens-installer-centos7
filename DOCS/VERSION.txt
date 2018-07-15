@@ -1,5 +1,5 @@
 Installer Version:
 
-1.0.0.el7 "Panthera tigris"
+1.0.1.el7 "Panthera tigris"
 
 ONLY FOR OPENSTACK RELEASE 17 "QUEENS"

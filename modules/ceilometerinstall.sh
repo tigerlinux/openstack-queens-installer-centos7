@@ -154,7 +154,7 @@ crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken user_domain_nam
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken project_name $keystoneservicestenant
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken signing_dir "/var/lib/ceilometer/tmp-signing"
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_version v3
 crudini --set /etc/ceilometer/ceilometer.conf keystone_authtoken memcached_servers $keystonehost:11211
@@ -370,7 +370,7 @@ then
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken project_name $keystoneservicestenant
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken auth_uri http://$keystonehost:5000
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-		crudini --set /etc/aodh/aodh.conf keystone_authtoken auth_url http://$keystonehost:35357
+		crudini --set /etc/aodh/aodh.conf keystone_authtoken auth_url http://$keystonehost:5000
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken signing_dir "/var/lib/aodh/tmp-signing"
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken auth_version v3
 		crudini --set /etc/aodh/aodh.conf keystone_authtoken memcached_servers $keystonehost:11211
@@ -496,7 +496,7 @@ then
 
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken auth_uri http://$keystonehost:5000/v3
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000/v3
-	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken auth_url http://$keystonehost:35357/v3
+	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken auth_url http://$keystonehost:5000/v3
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken auth_type password
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken memcached_servers $keystonehost:11211
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken project_domain_name $keystonedomain
@@ -508,7 +508,7 @@ then
 	crudini --set /etc/gnocchi/gnocchi.conf keystone_authtoken region_name $endpointsregion
 	crudini --set /etc/gnocchi/gnocchi.conf service_credentials auth_uri http://$keystonehost:5000/v3
 	crudini --set /etc/gnocchi/gnocchi.conf service_credentials www_authenticate_uri http://$keystonehost:5000/v3
-	crudini --set /etc/gnocchi/gnocchi.conf service_credentials auth_url http://$keystonehost:35357/v3
+	crudini --set /etc/gnocchi/gnocchi.conf service_credentials auth_url http://$keystonehost:5000/v3
 	crudini --set /etc/gnocchi/gnocchi.conf service_credentials auth_type password
 	crudini --set /etc/gnocchi/gnocchi.conf service_credentials memcached_servers $keystonehost:11211
 	crudini --set /etc/gnocchi/gnocchi.conf service_credentials project_domain_name $keystonedomain

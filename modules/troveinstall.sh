@@ -110,18 +110,18 @@ do
 	case $dbflavor in
 	"mysql")
 		crudini --set $myconffile database connection mysql+pymysql://$trovedbuser:$trovedbpass@$dbbackendhost:$mysqldbport/$trovedbname
-		crudini --set $myconffile database idle_timeout 3600
+		crudini --set $myconffile database connection_recycle_time 3600
 		;;
 	"postgres")
 		crudini --set $myconffile database connection postgresql://$trovedbuser:$trovedbpass@$dbbackendhost:$psqldbport/$trovedbname
-		crudini --set $myconffile database idle_timeout 3600
+		crudini --set $myconffile database connection_recycle_time 3600
 		;;
 	esac
 
 	crudini --set $myconffile DEFAULT log_dir /var/log/trove
 	crudini --set $myconffile DEFAULT debug False
 	crudini --set $myconffile DEFAULT control_exchange trove
-	crudini --set $myconffile DEFAULT trove_auth_url http://$keystonehost:35357/v3
+	crudini --set $myconffile DEFAULT trove_auth_url http://$keystonehost:5000/v3
 	crudini --set $myconffile DEFAULT nova_compute_url http://$novahost:8774/v2.1
 	crudini --set $myconffile DEFAULT cinder_url http://$cinderhost:8776/v2
 	crudini --set $myconffile DEFAULT swift_url http://$swifthost:8080/v1/AUTH_
@@ -312,7 +312,7 @@ crudini --set /etc/trove/trove.conf DEFAULT trove_api_workers $troveworkers
 crudini --set /etc/trove/trove.conf keystone_authtoken signing_dir /var/cache/trove
 crudini --set /etc/trove/trove.conf keystone_authtoken auth_uri http://$keystonehost:5000/v3
 crudini --set /etc/trove/trove.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000/v3
-crudini --set /etc/trove/trove.conf keystone_authtoken auth_url http://$keystonehost:35357/v3
+crudini --set /etc/trove/trove.conf keystone_authtoken auth_url http://$keystonehost:5000/v3
 crudini --set /etc/trove/trove.conf keystone_authtoken auth_plugin password
 crudini --set /etc/trove/trove.conf keystone_authtoken auth_type password
 crudini --set /etc/trove/trove.conf keystone_authtoken project_domain_name $keystonedomain
@@ -321,7 +321,7 @@ crudini --set /etc/trove/trove.conf keystone_authtoken project_name $keystoneser
 crudini --set /etc/trove/trove.conf keystone_authtoken username $troveuser
 crudini --set /etc/trove/trove.conf keystone_authtoken password $trovepass
 crudini --set /etc/trove/trove.conf keystone_authtoken auth_host $keystonehost
-crudini --set /etc/trove/trove.conf keystone_authtoken auth_port 35357
+crudini --set /etc/trove/trove.conf keystone_authtoken auth_port 5000
 crudini --set /etc/trove/trove.conf keystone_authtoken auth_protocol http
 crudini --set /etc/trove/trove.conf keystone_authtoken admin_tenant_name $keystoneservicestenant
 crudini --set /etc/trove/trove.conf keystone_authtoken admin_user $troveuser
@@ -332,7 +332,7 @@ crudini --set /etc/trove/trove.conf keystone_authtoken memcached_servers $keysto
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken signing_dir /var/cache/trove
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_uri http://$keystonehost:5000/v3
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000/v3
-crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_url http://$keystonehost:35357/v3
+crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_url http://$keystonehost:5000/v3
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_plugin password
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_type password
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken project_domain_name $keystonedomain
@@ -341,7 +341,7 @@ crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken project_name 
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken username $troveuser
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken password $trovepass
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_host $keystonehost
-crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_port 35357
+crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_port 5000
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken auth_protocol http
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken admin_tenant_name $keystoneservicestenant
 crudini --set /etc/trove/trove-taskmanager.conf keystone_authtoken admin_user $troveuser
@@ -458,7 +458,7 @@ crudini --set /etc/trove/trove-guestagent.conf DEFAULT control_exchange trove
 crudini --set /etc/trove/trove-guestagent.conf DEFAULT nova_proxy_admin_user $keystoneadminuser
 crudini --set /etc/trove/trove-guestagent.conf DEFAULT nova_proxy_admin_pass $keystoneadminpass
 crudini --set /etc/trove/trove-guestagent.conf DEFAULT nova_proxy_admin_tenant_name $keystoneadmintenant
-crudini --set /etc/trove/trove-guestagent.conf DEFAULT trove_auth_url http://$keystonehost:35357/v3
+crudini --set /etc/trove/trove-guestagent.conf DEFAULT trove_auth_url http://$keystonehost:5000/v3
 crudini --set /etc/trove/trove-guestagent.conf DEFAULT log_dir "/var/log/trove/"
 crudini --set /etc/trove/trove-guestagent.conf DEFAULT log_file guestagent.log
 

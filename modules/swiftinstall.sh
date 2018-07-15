@@ -254,7 +254,7 @@ crudini --set /etc/swift/proxy-server.conf "filter:authtoken" user_domain_name $
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" project_name $keystoneservicestenant
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" auth_uri http://$keystonehost:5000
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/swift/proxy-server.conf "filter:authtoken" auth_url http://$keystonehost:35357
+crudini --set /etc/swift/proxy-server.conf "filter:authtoken" auth_url http://$keystonehost:5000
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" include_service_catalog False
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" auth_version v3
 crudini --set /etc/swift/proxy-server.conf "filter:authtoken" delay_auth_decision True

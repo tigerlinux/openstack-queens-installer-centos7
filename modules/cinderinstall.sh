@@ -158,8 +158,11 @@ then
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_group $cinderlvmname
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_driver "cinder.volume.drivers.lvm.LVMVolumeDriver"
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_protocol iscsi
+		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost target_protocol iscsi
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_helper tgtadm
+		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost target_helper tgtadm
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_ip_address $cinder_iscsi_ip_address
+		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost target_ip_address $cinder_iscsi_ip_address
 		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_backend_name LVM_iSCSI-$cindernodehost
 		case $cindervolclearmode in
 			"zero")
@@ -249,7 +252,7 @@ case $dbflavor in
 esac
  
 crudini --set /etc/cinder/cinder.conf database retry_interval 10
-crudini --set /etc/cinder/cinder.conf database idle_timeout 3600
+crudini --set /etc/cinder/cinder.conf database connection_recycle_time 3600
 crudini --set /etc/cinder/cinder.conf database min_pool_size 1
 crudini --set /etc/cinder/cinder.conf database max_pool_size 10
 crudini --set /etc/cinder/cinder.conf database max_retries 100
@@ -257,7 +260,7 @@ crudini --set /etc/cinder/cinder.conf database pool_timeout 10
  
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_type password
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers $keystonehost:11211
 crudini --set /etc/cinder/cinder.conf keystone_authtoken project_domain_name $keystonedomain
@@ -283,6 +286,7 @@ crudini --del /etc/cinder/cinder.conf DEFAULT os_privileged_user_auth_url
 crudini --set /etc/cinder/cinder.conf DEFAULT nova_catalog_info "compute:nova:internalURL"
 crudini --set /etc/cinder/cinder.conf DEFAULT nova_catalog_admin_info "compute:nova:adminURL"
 crudini --set /etc/cinder/cinder.conf DEFAULT os_region_name $endpointsregion
+crudini --set /etc/cinder/cinder.conf nova region_name $endpointsregion
 #
 #
 #

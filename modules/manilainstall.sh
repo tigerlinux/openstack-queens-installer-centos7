@@ -137,7 +137,7 @@ esac
 
 crudini --set /etc/manila/manila.conf DEFAULT auth_strategy keystone
 crudini --set /etc/manila/manila.conf keystone_authtoken auth_uri http://$keystonehost:5000
-crudini --set /etc/manila/manila.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/manila/manila.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/manila/manila.conf keystone_authtoken auth_type password
 crudini --set /etc/manila/manila.conf keystone_authtoken memcached_servers $keystonehost:11211
 crudini --set /etc/manila/manila.conf keystone_authtoken project_domain_name $keystonedomain

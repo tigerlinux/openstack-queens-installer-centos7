@@ -112,7 +112,7 @@ case $dbflavor in
 esac
 
 crudini --set /etc/heat/heat.conf database retry_interval 10
-crudini --set /etc/heat/heat.conf database idle_timeout 3600
+crudini --set /etc/heat/heat.conf database connection_recycle_time 3600
 crudini --set /etc/heat/heat.conf database min_pool_size 1
 crudini --set /etc/heat/heat.conf database max_pool_size 10
 crudini --set /etc/heat/heat.conf database max_retries 100
@@ -156,7 +156,7 @@ crudini --set /etc/heat/heat.conf heat_api_cloudwatch workers $heatworkers
 crudini --set /etc/heat/heat.conf keystone_authtoken project_name $keystoneservicestenant
 crudini --set /etc/heat/heat.conf keystone_authtoken username $heatuser
 crudini --set /etc/heat/heat.conf keystone_authtoken password $heatpass
-crudini --set /etc/heat/heat.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/heat/heat.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/heat/heat.conf keystone_authtoken project_domain_name $keystonedomain
 crudini --set /etc/heat/heat.conf keystone_authtoken user_domain_name $keystonedomain
 crudini --set /etc/heat/heat.conf keystone_authtoken signing_dir /tmp/keystone-signing-heat
@@ -180,7 +180,7 @@ crudini --del /etc/heat/heat.conf keystone_authtoken auth_protocol
 #
 crudini --set /etc/heat/heat.conf trustee username $heatuser
 crudini --set /etc/heat/heat.conf trustee password $heatpass
-crudini --set /etc/heat/heat.conf trustee auth_url http://$keystonehost:35357
+crudini --set /etc/heat/heat.conf trustee auth_url http://$keystonehost:5000
 crudini --set /etc/heat/heat.conf trustee project_domain_name $keystonedomain
 crudini --set /etc/heat/heat.conf trustee user_domain_name $keystonedomain
 crudini --set /etc/heat/heat.conf trustee auth_plugin password
@@ -195,8 +195,8 @@ crudini --del /etc/heat/heat.conf trustee admin_tenant_name
 crudini --del /etc/heat/heat.conf trustee admin_user
 crudini --del /etc/heat/heat.conf trustee admin_password
 #
-crudini --set /etc/heat/heat.conf clients_keystone auth_uri http://$keystonehost:35357
-crudini --set /etc/heat/heat.conf clients_keystone www_authenticate_uri http://$keystonehost:35357
+crudini --set /etc/heat/heat.conf clients_keystone auth_uri http://$keystonehost:5000
+crudini --set /etc/heat/heat.conf clients_keystone www_authenticate_uri http://$keystonehost:5000
 # crudini --set /etc/heat/heat.conf ec2authtoken auth_uri http://$keystonehost:5000/v2.0
 crudini --set /etc/heat/heat.conf ec2authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/heat/heat.conf clients_heat url "http://$heathost:8004/v1/%(tenant_id)s"

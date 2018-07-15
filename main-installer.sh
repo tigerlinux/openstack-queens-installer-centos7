@@ -5,8 +5,8 @@
 # E-Mail: TigerLinux@Gmail.com
 #
 # Main Installer Script
-# Version: 1.0.0.el7 "Panthera tigris"
-# July 13, 2018
+# Version: 1.0.1.el7 "Panthera tigris"
+# July 15, 2018
 #
 
 PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
@@ -75,7 +75,7 @@ case $1 in
 	echo "Flavor: OpenStack QUEENS for Centos 7"
 	echo "Made by: Reynaldo R. Martinez P."
 	echo "E-Mail: TigerLinux@Gmail.com"
-	echo "Version 1.0.0.el7 \"Panthera tigris\" - July 13, 2018"
+	echo "Version 1.0.1.el7 \"Panthera tigris\" - July 15, 2018"
 	echo ""
 	echo "I'll verify all requiremens"
 	echo "If any requirement is not met, I'll stop and inform what's missing"
@@ -200,7 +200,7 @@ case $1 in
 		fi
 
 	else
-		OS_URL="http://$keystonehost:35357/v3"
+		OS_URL="http://$keystonehost:5000/v3"
 		OS_USERNAME=$keystoneadminuser
 		OS_TENANT_NAME=$keystoneadminuser
 		OS_PROJECT_NAME=$keystoneadminuser
@@ -221,7 +221,7 @@ case $1 in
 		echo "export OS_USER_DOMAIN_NAME=$keystonedomain" >> $keystone_admin_rc_file
 		echo "PS1='[\u@\h \W(keystone_admin)]\$ '" >> $keystone_admin_rc_file
 
-        	OS_AUTH_URL_FULLADMIN="http://$keystonehost:35357/v3"
+        	OS_AUTH_URL_FULLADMIN="http://$keystonehost:5000/v3"
 
         	echo "export OS_USERNAME=$OS_USERNAME" >> $keystone_fulladmin_rc_file
         	echo "export OS_PASSWORD=$OS_PASSWORD" >> $keystone_fulladmin_rc_file

@@ -56,7 +56,7 @@ keystonetokenflavor="fernet"
 
 if [ $keystoneinstall == "no" ]
 then
-	OS_URL="http://$keystonehost:35357/v3"
+	OS_URL="http://$keystonehost:5000/v3"
 	OS_USERNAME=$keystoneadminuser
 	OS_TENANT_NAME=$keystoneadminuser
 	OS_PROJECT_NAME=$keystoneadminuser
@@ -77,7 +77,7 @@ then
 	echo "export OS_USER_DOMAIN_NAME=$keystonedomain" >> $keystone_admin_rc_file
 	echo "PS1='[\u@\h \W(keystone_admin)]\$ '" >> $keystone_admin_rc_file
 
-	OS_AUTH_URL_FULLADMIN="http://$keystonehost:35357/v3"
+	OS_AUTH_URL_FULLADMIN="http://$keystonehost:5000/v3"
 
 	echo "export OS_USERNAME=$OS_USERNAME" >> $keystone_fulladmin_rc_file
 	echo "export OS_PASSWORD=$OS_PASSWORD" >> $keystone_fulladmin_rc_file
@@ -191,7 +191,7 @@ esac
 # crudini --set /etc/keystone/keystone.conf paste_deploy config_file /etc/keystone/keystone-paste.ini
 
 crudini --set /etc/keystone/keystone.conf database retry_interval 10
-crudini --set /etc/keystone/keystone.conf database idle_timeout 3600
+crudini --set /etc/keystone/keystone.conf database connection_recycle_time 3600
 crudini --set /etc/keystone/keystone.conf database min_pool_size 1
 crudini --set /etc/keystone/keystone.conf database max_pool_size 10
 crudini --set /etc/keystone/keystone.conf database max_retries 100
@@ -332,12 +332,12 @@ keystone-manage bootstrap \
         --bootstrap-service-name "keystone"
 
 
-OS_URL="http://$keystonehost:35357/v3"
+OS_URL="http://$keystonehost:5000/v3"
 OS_USERNAME=$keystoneadminuser
 OS_TENANT_NAME=$keystoneadminuser
 OS_PROJECT_NAME=$keystoneadminuser
 OS_PASSWORD=$keystoneadminpass
-OS_AUTH_URL="http://$keystonehost:35357/v3"
+OS_AUTH_URL="http://$keystonehost:5000/v3"
 OS_VOLUME_API_VERSION=2
 OS_PROJECT_DOMAIN_NAME=$keystonedomain
 OS_USER_DOMAIN_NAME=$keystonedomain
@@ -353,7 +353,7 @@ echo "export OS_PROJECT_DOMAIN_NAME=$keystonedomain" >> $keystone_admin_rc_file
 echo "export OS_USER_DOMAIN_NAME=$keystonedomain" >> $keystone_admin_rc_file
 echo "PS1='[\u@\h \W(keystone_admin)]\$ '" >> $keystone_admin_rc_file
 
-OS_AUTH_URL_FULLADMIN="http://$keystonehost:35357/v3"
+OS_AUTH_URL_FULLADMIN="http://$keystonehost:5000/v3"
 
 echo "export OS_USERNAME=$OS_USERNAME" >> $keystone_fulladmin_rc_file
 echo "export OS_PASSWORD=$OS_PASSWORD" >> $keystone_fulladmin_rc_file

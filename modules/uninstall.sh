@@ -100,13 +100,22 @@ yum -y erase openstack-glance \
 	python-backports \
 	python-backports-ssl_match_hostname \
 	scsi-target-utils \
-	scsi-target-utils-gluster
+	scsi-target-utils-gluster \
+	qemu-kvm-ev qemu-kvm-common-ev \
+	qemu-img-ev \
+	python-openstackclient-lan \
+	memcached \
+	python-memcached \
+	httpd-tools \
+	httpd
 
 yum -y erase openstack-puppet-modules openstack-packstack-puppet
 yum -y erase qpid-cpp-server qpid-cpp-server-ssl qpid-cpp-client cyrus-sasl cyrus-sasl-md5 cyrus-sasl-plain
 yum -y erase rabbitmq-server
 yum -y erase grafana*
 yum -y erase bind
+yum -y erase python2*
+yum -y erase puppet-*
 rm -rf /var/named
 yum -y erase strongswan strongswan-libipsec strongswan-charon-nm strongswan-tnc-imcvs
 
@@ -151,6 +160,10 @@ userdel -f -r designate
 userdel -f -r named
 userdel -f -r gnocchi
 userdel -f -r magnum
+userdel -f -r memcached
+userdel -f -r qemu
+userdel -f -r apache
+
 
 echo "Erasing remaining files"
 
@@ -222,7 +235,14 @@ rm -fr /etc/glance \
 	/var/lib/grafana \
 	/etc/httpd/conf.d/wsgi-aodh.conf \
 	/etc/httpd/conf.d/wsgi-ceilometer.conf \
-	/root/keystonerc_*
+	/root/keystonerc_* \
+	/etc/libvirt \
+	/var/lib/libvirt \
+	/var/log/libvirt \
+	/etc/modprobe.d/kvm.conf.rpmsave \
+	/etc/sysconfig/memcached.rpmsave \
+	/etc/httpd \
+	/var/log/httpd
 
 rm -fr /var/log/{keystone,glance,nova,neutron,cinder,ceilometer,heat,sahara,trove,aodh,manila,designate}*
 rm -fr /run/{keystone,glance,nova,neutron,cinder,ceilometer,heat,trove,sahara,aodh,manila,designate}*
@@ -283,10 +303,10 @@ then
 	/var/tmp/vm-number-by-states.txt
 fi
 
-echo "Restaring Apache without Horizon"
+# echo "Restaring Apache without Horizon"
 
-service httpd restart
-service memcached restart
+# service httpd restart
+# service memcached restart
 
 #
 # Clean up iptables

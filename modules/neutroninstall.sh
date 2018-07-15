@@ -277,7 +277,7 @@ crudini --set /etc/neutron/neutron.conf agent root_helper "sudo neutron-rootwrap
  
 crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_type password
 crudini --set /etc/neutron/neutron.conf keystone_authtoken memcached_servers $keystonehost:11211
 crudini --set /etc/neutron/neutron.conf keystone_authtoken project_domain_name $keystonedomain
@@ -330,7 +330,7 @@ crudini --set /etc/neutron/neutron.conf quotas quota_driver neutron.db.quota.dri
 # Nova section
 #
 
-crudini --set /etc/neutron/neutron.conf nova auth_url http://$keystonehost:35357
+crudini --set /etc/neutron/neutron.conf nova auth_url http://$keystonehost:5000
 crudini --set /etc/neutron/neutron.conf nova auth_type password
 crudini --set /etc/neutron/neutron.conf nova project_domain_name $keystonedomain
 crudini --set /etc/neutron/neutron.conf nova user_domain_name $keystonedomain
@@ -499,7 +499,7 @@ case $dbflavor in
 esac
  
 crudini --set /etc/neutron/neutron.conf database retry_interval 10
-crudini --set /etc/neutron/neutron.conf database idle_timeout 3600
+crudini --set /etc/neutron/neutron.conf database connection_recycle_time 3600
 
 #
 # ML2 Plugin Configuration
@@ -562,14 +562,14 @@ esac
 #
 
 crudini --set /etc/neutron/neutron.conf database retry_interval 10
-crudini --set /etc/neutron/neutron.conf database idle_timeout 3600
+crudini --set /etc/neutron/neutron.conf database connection_recycle_time 3600
 crudini --set /etc/neutron/neutron.conf database min_pool_size 1
 crudini --set /etc/neutron/neutron.conf database max_pool_size 10
 crudini --set /etc/neutron/neutron.conf database max_retries 100
 crudini --set /etc/neutron/neutron.conf database pool_timeout 10
 
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database retry_interval 10
-crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database idle_timeout 3600
+crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database connection_recycle_time 3600
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database min_pool_size 1
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database max_pool_size 10
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini database max_retries 100
@@ -615,7 +615,7 @@ crudini --set /etc/neutron/metadata_agent.ini DEFAULT metadata_proxy_shared_secr
 
 crudini --set /etc/neutron/metadata_agent.ini DEFAULT auth_uri "http://$keystonehost:5000"
 crudini --set /etc/neutron/metadata_agent.ini DEFAULT www_authenticate_uri "http://$keystonehost:5000"
-crudini --set /etc/neutron/metadata_agent.ini DEFAULT auth_url "http://$keystonehost:35357"
+crudini --set /etc/neutron/metadata_agent.ini DEFAULT auth_url "http://$keystonehost:5000"
 crudini --set /etc/neutron/metadata_agent.ini DEFAULT auth_type password
 crudini --set /etc/neutron/metadata_agent.ini DEFAULT project_domain_name $keystonedomain
 crudini --set /etc/neutron/metadata_agent.ini DEFAULT user_domain_name $keystonedomain

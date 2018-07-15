@@ -1,3 +1,10 @@
+1.0.1.el7 - July 15, 2018
+
+- Minor changes on deprecated config options.
+- Minor changes on the uninstall module.
+- All Keystone endpoints set to port 5000 on all
+  modules. Port 35357 is still available but unused.
+
 1.0.0.el7 - July 13, 2018
 
 - Production ready release for Centos 7.

@@ -158,7 +158,7 @@ echo "Configuring NOVA"
 
 crudini --set /etc/nova/nova.conf keystone_authtoken auth_uri http://$keystonehost:5000
 crudini --set /etc/nova/nova.conf keystone_authtoken www_authenticate_uri http://$keystonehost:5000
-crudini --set /etc/nova/nova.conf keystone_authtoken auth_url http://$keystonehost:35357
+crudini --set /etc/nova/nova.conf keystone_authtoken auth_url http://$keystonehost:5000
 crudini --set /etc/nova/nova.conf keystone_authtoken auth_type password
 crudini --set /etc/nova/nova.conf keystone_authtoken project_domain_name $keystonedomain
 crudini --set /etc/nova/nova.conf keystone_authtoken user_domain_name $keystonedomain
@@ -190,8 +190,8 @@ crudini --set /etc/nova/nova.conf DEFAULT instance_usage_audit_period hour
 crudini --set /etc/nova/nova.conf DEFAULT log_dir /var/log/nova
 crudini --set /etc/nova/nova.conf DEFAULT state_path /var/lib/nova
 crudini --set /etc/nova/nova.conf DEFAULT volumes_dir /etc/nova/volumes
-crudini --set /etc/nova/nova.conf DEFAULT dhcpbridge /usr/bin/nova-dhcpbridge
-crudini --set /etc/nova/nova.conf DEFAULT dhcpbridge_flagfile /etc/nova/nova.conf
+# crudini --set /etc/nova/nova.conf DEFAULT dhcpbridge /usr/bin/nova-dhcpbridge
+# crudini --set /etc/nova/nova.conf DEFAULT dhcpbridge_flagfile /etc/nova/nova.conf
 # No longer needed
 # crudini --set /etc/nova/nova.conf DEFAULT force_dhcp_release True
 crudini --set /etc/nova/nova.conf DEFAULT injected_network_template /usr/share/nova/interfaces.template
@@ -232,14 +232,14 @@ case $dbflavor in
 esac
 
 crudini --set /etc/nova/nova.conf database retry_interval 10
-crudini --set /etc/nova/nova.conf database idle_timeout 3600
+crudini --set /etc/nova/nova.conf database connection_recycle_time 3600
 crudini --set /etc/nova/nova.conf database min_pool_size 1
 crudini --set /etc/nova/nova.conf database max_pool_size 10
 crudini --set /etc/nova/nova.conf database max_retries 100
 crudini --set /etc/nova/nova.conf database pool_timeout 10
 
 crudini --set /etc/nova/nova.conf api_database retry_interval 10
-crudini --set /etc/nova/nova.conf api_database idle_timeout 3600
+crudini --set /etc/nova/nova.conf api_database connection_recycle_time 3600
 crudini --set /etc/nova/nova.conf api_database min_pool_size 1
 crudini --set /etc/nova/nova.conf api_database max_pool_size 10
 crudini --set /etc/nova/nova.conf api_database max_retries 100
@@ -249,11 +249,12 @@ crudini --set /etc/nova/nova.conf api_database pool_timeout 10
 # Placement
 #
 crudini --set /etc/nova/nova.conf placement os_region_name $endpointsregion
+crudini --set /etc/nova/nova.conf placement region_name $endpointsregion
 crudini --set /etc/nova/nova.conf placement project_domain_name $keystonedomain
 crudini --set /etc/nova/nova.conf placement project_name $keystoneservicestenant
 crudini --set /etc/nova/nova.conf placement auth_type password
 crudini --set /etc/nova/nova.conf placement user_domain_name $keystonedomain
-crudini --set /etc/nova/nova.conf placement auth_url http://$keystonehost:35357/v3
+crudini --set /etc/nova/nova.conf placement auth_url http://$keystonehost:5000/v3
 crudini --set /etc/nova/nova.conf placement username $novaplacementuser
 crudini --set /etc/nova/nova.conf placement password $novaplacementuserpass
 
@@ -301,7 +302,7 @@ crudini --set /etc/nova/nova.conf DEFAULT connection_type libvirt
 crudini --set /etc/nova/nova.conf neutron url "http://$neutronhost:9696"
 # crudini --set /etc/nova/nova.conf neutron neutron_default_tenant_id default
 crudini --set /etc/nova/nova.conf neutron auth_type password
-crudini --set /etc/nova/nova.conf neutron auth_url "http://$keystonehost:35357"
+crudini --set /etc/nova/nova.conf neutron auth_url "http://$keystonehost:5000"
 crudini --set /etc/nova/nova.conf neutron project_domain_name $keystonedomain
 crudini --set /etc/nova/nova.conf neutron user_domain_name $keystonedomain
 crudini --set /etc/nova/nova.conf neutron region_name $endpointsregion
@@ -311,7 +312,7 @@ crudini --set /etc/nova/nova.conf neutron password $neutronpass
 crudini --set /etc/nova/nova.conf neutron service_metadata_proxy True
 crudini --set /etc/nova/nova.conf neutron metadata_proxy_shared_secret $metadata_shared_secret
  
-crudini --set /etc/nova/nova.conf DEFAULT linuxnet_ovs_integration_bridge $integration_bridge
+# crudini --set /etc/nova/nova.conf DEFAULT linuxnet_ovs_integration_bridge $integration_bridge
 crudini --set /etc/nova/nova.conf neutron ovs_bridge $integration_bridge
  
 #
@@ -322,10 +323,12 @@ case $consoleflavor in
 "vnc")
 	crudini --set /etc/nova/nova.conf vnc enabled True
 	crudini --set /etc/nova/nova.conf vnc novncproxy_host $nova_computehost
-	crudini --set /etc/nova/nova.conf vnc vncserver_proxyclient_address $nova_computehost
+	# crudini --set /etc/nova/nova.conf vnc vncserver_proxyclient_address $nova_computehost
+	crudini --set /etc/nova/nova.conf vnc server_proxyclient $nova_computehost
 	crudini --set /etc/nova/nova.conf vnc novncproxy_base_url "http://$vncserver_controller_address:6080/vnc_auto.html"
 	crudini --set /etc/nova/nova.conf vnc novncproxy_port 6080
-	crudini --set /etc/nova/nova.conf vnc vncserver_listen $nova_computehost
+	# crudini --set /etc/nova/nova.conf vnc vncserver_listen $nova_computehost
+	crudini --set /etc/nova/nova.conf vnc server_listen $nova_computehost
 	crudini --set /etc/nova/nova.conf vnc keymap $vnc_keymap
 	crudini --del /etc/nova/nova.conf spice html5proxy_base_url > /dev/null 2>&1
 	crudini --del /etc/nova/nova.conf spice server_listen > /dev/null 2>&1
@@ -336,10 +339,12 @@ case $consoleflavor in
 	;;
 "spice")
 	crudini --del /etc/nova/nova.conf DEFAULT novncproxy_host > /dev/null 2>&1
-	crudini --del /etc/nova/nova.conf vnc vncserver_proxyclient_address > /dev/null 2>&1
+	# crudini --del /etc/nova/nova.conf vnc vncserver_proxyclient_address > /dev/null 2>&1
+	crudini --del /etc/nova/nova.conf vnc server_proxyclient > /dev/null 2>&1
 	crudini --del /etc/nova/nova.conf vnc novncproxy_base_url > /dev/null 2>&1
 	crudini --del /etc/nova/nova.conf DEFAULT novncproxy_port > /dev/null 2>&1
-	crudini --del /etc/nova/nova.conf vnc vncserver_listen > /dev/null 2>&1
+	# crudini --del /etc/nova/nova.conf vnc vncserver_listen > /dev/null 2>&1
+	crudini --del /etc/nova/nova.conf vnc server_listen > /dev/null 2>&1
 	crudini --del /etc/nova/nova.conf vnc keymap > /dev/null 2>&1
 	crudini --set /etc/nova/nova.conf vnc enabled False > /dev/null 2>&1
 	crudini --set /etc/nova/nova.conf DEFAULT novnc_enabled False > /dev/null 2>&1
